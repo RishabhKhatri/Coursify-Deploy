@@ -1,0 +1,28 @@
+<% provide(:title, "Admin - All Institutes") %>
+
+<div class="index_panel panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">For Admin user only</h1>
+  </div>
+  <div class="panel-body">
+    <ul style="list-style-type: none;">
+      <table class="table table-hover">
+        <tbody>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <% @institutes.each do |institute| %>
+            <tr>
+              <li>
+                <td><%= institute.name %></td>
+                <td><%= link_to 'Update', edit_institute_url(institute, subdomain: institute.subdomain), class: 'btn btn-primary btn-sm' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </ul>
+  </div>
+</div>

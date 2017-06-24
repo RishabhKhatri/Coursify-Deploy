@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  summary: MyText
+  code: MyString
+  duration: 2017-06-17 23:43:01
+  teacher: one
+
+two:
+  name: MyString
+  summary: MyText
+  code: MyString
+  duration: 2017-06-17 23:43:01
+  teacher: two

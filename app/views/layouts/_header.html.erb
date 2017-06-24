@@ -1,0 +1,64 @@
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Coursify', root_url(subdomain: ''), class: 'navbar-brand' %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar">
+
+      <ul class="nav navbar-nav">
+        <li><%= link_to '<i class="fa fa-home" aria-hidden="true"></i> Home'.html_safe, root_url(subdomain: '') %></li>
+        <% if !user_signed_in? %>
+          <% if teacher_signed_in? and check_institute? %>
+            <li><%= link_to '<i class="fa fa-university" aria-hidden="true"></i>
+ Channel Home'.html_safe, root_url(current_institute, subdomain: current_institute.subdomain) %></li>
+          <% end %>
+        <% end %>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to '<i class="fa fa-sign-in" aria-hidden="true"></i> Sign in'.html_safe, login_url(subdomain: 'accounts') %></li>
+        <% else %>
+          <% if teacher_signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><%= current_teacher.name %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to '<i class="fa fa-user" aria-hidden="true"></i> Profile'.html_safe, teacher_url(current_teacher, subdomain: '') %></li>
+                <li><%= link_to '<i class="fa fa-cogs" aria-hidden="true"></i> Settings'.html_safe, edit_teacher_url(current_teacher, subdomain: '') %></li>
+                <% if current_teacher.admin? %>
+                  <li><%= link_to '<i class="fa fa-users" aria-hidden="true"></i> All Teachers'.html_safe, teachers_url(subdomain: '') %></li>
+                  <li><%= link_to '<i class="fa fa-university" aria-hidden="true"></i> All Institutes'.html_safe, institutes_url(subdomain: '') %></li>
+                <% end %>
+                <% if check_institute_admin? %>
+                  <li><%= link_to '<i class="fa fa-university" aria-hidden="true"></i>Manage Channel'.html_safe, edit_institute_url(current_institute, subdomain: current_institute.subdomain) %></li>
+                <% end %>
+                <li><%= link_to '<i class="fa fa-sign-out" aria-hidden="true"></i> Sign out'.html_safe, logout_path %></li>
+              </ul>
+            </li>
+          <% elsif student_signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><%= current_student.name %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to '<i class="fa fa-user" aria-hidden="true"></i> Profile'.html_safe, student_url(current_student, subdomain: 'dashboard') %></li>
+                <li><%= link_to '<i class="fa fa-cogs" aria-hidden="true"></i> Settings'.html_safe, edit_student_url(current_student, subdomain: 'dashboard') %></li>
+                <% if current_student.admin? %>
+                  <li><%= link_to '<i class="fa fa-users" aria-hidden="true"></i> All Students'.html_safe, students_url(subdomain: 'dashboard') %></li>
+                <% end %>
+                <li><%= link_to '<i class="fa fa-sign-out" aria-hidden="true"></i> Sign out'.html_safe, logout_path %></li>
+              </ul>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

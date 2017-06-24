@@ -1,0 +1,40 @@
+<% provide(:title, "Admin - All Students") %>
+
+<div class="index_panel panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">For Admin only</h1>
+  </div>
+  <div class="panel-body">
+    <ul style="list-style-type: none;">
+      <table class="table table-hover">
+        <tbody>
+          <thead>
+            <tr>
+              <!-- <th>Profile</th> -->
+              <th>Name</th>
+              <th>Email</th>
+              <th>D.O.B</th>
+              <th>Contact</th>
+              <% if current_student.admin? %>
+                <th>Delete</th>
+              <% end %>
+            </tr>
+          </thead>
+          <% @students.each do |student| %>
+            <tr>
+              <li>
+                <td><%= student.name %></td>
+                <td><%= student.email %></td>
+                <td><%= student.dob %></td>
+                <td><%= student.contact %></td>
+                <% if current_student.admin? %>
+                  <td><%= link_to 'Delete', student, method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: "Are you sure?"} %></td>
+                <% end %>
+              </li>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </ul>
+  </div>
+</div>

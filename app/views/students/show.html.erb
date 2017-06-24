@@ -1,0 +1,18 @@
+<% provide(:title, @student.name) %>
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= @student.name %>
+      </div>
+      <div class="panel-body">
+        <% if @student.picture? %>
+          <%= image_tag @student.picture.url %>
+        <% elsif !@student.imglink.nil? %>
+          <%= image_tag @student.imglink %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

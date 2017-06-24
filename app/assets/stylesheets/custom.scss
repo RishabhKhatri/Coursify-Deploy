@@ -1,0 +1,122 @@
+$footer-grey: #444;
+
+body{
+  margin-top: 70px;
+}
+
+.navbar{
+  border-radius: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  z-index: 10;
+  box-shadow: 0 0 8px 0 #444;
+}
+
+.navbar-brand{
+  font-family: "Satisfy", cursive;
+}
+
+.panel{
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  .panel-heading{
+    font-size: 25px;
+  }
+  .panel-body{
+    font-size: 40px;
+  }
+  .panel-footer{
+    font-size: 20px;
+  }
+}
+
+.footer{
+  nav{
+    ul{
+      list-style-type: none;
+      padding: 0;
+      li{
+        padding: 5px;
+        a{
+          text-decoration: none;
+          color: $footer-grey;
+          &:hover{
+            color: #06f;
+          }
+        }
+      }
+    }
+  }
+}
+
+.signup-panel{
+  .panel-body{
+    font-size: 15px;
+    text-align: justify;
+  }
+}
+
+.index_panel{
+  .panel-body{
+    font-size: 15px;
+    text-align: justify;
+  }
+}
+
+.error_display{
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.index_picture{
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.login-panel{
+  h1{
+    font-weight: 300;
+  }
+  ul{
+    list-style-type: none;
+  }
+}
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+}
+
+.vertical-menu{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
+  li{
+    a{
+      display: block;
+      color: #000;
+      padding: 8px 16px;
+      text-decoration: none;
+      &:hover{
+        background-color: #555;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.course-panel{
+  text-align: justify;
+  .panel-body{
+    font-size: 20px;
+  }
+  h1{
+    font-size: 25px;
+  }
+}

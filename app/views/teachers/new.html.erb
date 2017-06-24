@@ -1,0 +1,92 @@
+<% provide(:title, "Sign Up - Teacher") %>
+
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+    <div class="signup-panel panel panel-default">
+      <div class="panel-body">
+        <h1 style="text-align: center;font-weight: 300;">Sign Up</h1>
+        <%= form_for(@teacher, url: teacher_signup_path, :html => {class: 'form-horizontal'}) do |f| %>
+
+        <%= render 'shared/error_messages', class: 'form-control' %>
+
+          <div class="form-group">
+            <%= f.label :name, class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.text_field :name, class: 'form-control', placeholder: "Name" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.email_field :email, class: 'form-control', placeholder: "E-mail" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :contact, class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.text_field :contact, class: 'form-control', placeholder: "Contact" %>
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
+            <%= f.label :institute, class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.collection_select :institute_id, Institute.order(:name), :id, :name, {include_blank: true}, {class: 'form-control'} %>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+              <p>If you can't find your Institute in the list please leave the field blank.</p>
+            </div>
+          </div> -->
+
+          <div class="form-group">
+            <%= f.label :expertise, class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.text_field :expertise, class: 'form-control', placeholder: "Expertise" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password, class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation, "Confirmation", class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Password Confirmation" %>
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
+            <%= f.label :picture, "Profile pic", class: 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <span class="picture">
+                <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+              </span>
+            </div>
+          </div> -->
+
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit "Create my account", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#teacher_picture').bind('change', function() {
+  var size_in_megabytes = this.files[0].size/1024/1024;
+  if (size_in_megabytes > 5) {
+    alert('Maximum file size is 5MB. Please choose a smaller file.');
+  }
+  });
+</script>

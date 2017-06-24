@@ -1,0 +1,29 @@
+<% provide(:title, "All Courses") %>
+
+<div class="row">
+  <div class="col-xs-2">
+    <%= render 'institutes/menu' %>
+  </div>
+  <div class="col-xs-10">
+    <% if @courses.empty? %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h1>No courses created yet.</h1>
+        </div>
+      </div>
+    <% else %>
+      <% @courses.each do |course| %>
+        <div class="course-panel panel panel-default">
+          <div class="panel-body">
+            <h1><%= course.name %> - <%= course.code %></h1>
+            <% if course.archived? %>
+              <%= link_to 'Go to course', course_url(course, subdomain: current_institute.subdomain) %> | Course archived.
+            <% else %>
+              <%= link_to 'Go to course', course_url(course, subdomain: current_institute.subdomain) %> | <%= link_to 'Edit', edit_course_url(course, subdomain: current_institute.subdomain) %> | <%= link_to 'Archive', archive_course_path(course), data: {confirm: "Are you sure?"} %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

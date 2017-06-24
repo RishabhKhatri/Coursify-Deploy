@@ -1,0 +1,21 @@
+<% provide(:title, "Manage Teachers") %>
+
+<div class="row">
+  <div class="col-xs-2">
+    <%= render 'institutes/menu' %>
+  </div>
+  <div class="col-xs-10">
+    <% @institute.teachers.each do |teacher| %>
+      <div class="course-panel panel panel-default">
+        <div class="panel-body">
+          <% if teacher.email==@institute.admin %>
+            <h1>Admin: <%= teacher.name %></h1>
+          <% else %>
+            <h1><%= teacher.name %></h1>
+            <%= link_to 'Remove from channel', remove_teacher_url(teacher, subdomain: current_institute.subdomain), class: 'btn btn-danger', data: { confirm: "Are you sure?" } %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

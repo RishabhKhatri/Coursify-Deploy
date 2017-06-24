@@ -1,0 +1,2 @@
+module InstituteHelper
+end

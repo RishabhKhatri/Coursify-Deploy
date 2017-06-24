@@ -1,0 +1,27 @@
+<% if user_signed_in? %>
+  <div class="home-panel panel panel-default">
+    <div class="panel-body">
+      <h1>Welcome to Coursify</h1>
+      <span style="font-size: 25px;">Please <%= link_to 'Sign In', login_url(subdomain: 'accounts') %> to continue.</span>
+      <br>
+      <span style="font-size: 20px;">Don't have an account? Please <%= link_to 'Sign Up', signup_url(subdomain: 'accounts') %>.</span>
+    </div>
+    <div class="panel-footer">
+      Some of the features are not available yet. Please wait for a few days.
+    </div>
+  </div>
+<% else %>
+  <% if teacher_signed_in? %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h1>Welcome <%= current_teacher.name %></h1>
+        <% if current_teacher.institute_id.nil? %>
+          <span style="font-size: 25px;">You are currently not linked to any institute. Please join an institute channel <%= link_to 'here', edit_channel_path(current_teacher) %>.</span>
+        <% else %>
+          <span style="font-size: 25px;">Manage your courses on your institute's <%= link_to 'channel', root_url(current_teacher, subdomain: current_institute.subdomain) %>.</span>
+        <% end %>
+      </div>
+    </div>
+  <% elsif student_signed_in? %>
+  <% end %>
+<% end %>

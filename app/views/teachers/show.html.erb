@@ -1,0 +1,22 @@
+<% provide(:title, @teacher.name) %>
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= @teacher.name %>
+      </div>
+      <div class="panel-body">
+        <% if @teacher.picture? %>
+          <%= image_tag @teacher.picture.url %>
+        <% elsif !@teacher.imglink.nil? %>
+          <%= image_tag @teacher.imglink %>
+        <% end %>
+        <br>
+        <% if !@teacher.institute_id.nil? %>
+          <%= Institute.find(@teacher.institute_id).name %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

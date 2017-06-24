@@ -1,0 +1,17 @@
+<% provide(:title, "#{@course.code.upcase}") %>
+
+<div class="row">
+  <div class="col-xs-2">
+    <%= render 'courses/menu' %>
+  </div>
+  <div class="col-xs-10">
+    <div class="course-panel panel-default">
+      <div class="panel-body">
+        <h1><%= @course.name %> | <%= @course.code %></h1>
+        <summary>
+          <%= @course.summary %>
+        </summary>
+      </div>
+    </div>
+  </div>
+</div>

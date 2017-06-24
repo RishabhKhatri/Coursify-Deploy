@@ -1,0 +1,8 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h1>Sign Up</h1>
+    <% if user_signed_in? %>
+      <%= link_to 'Signup as a Teacher', teacher_signup_url(subdomain: 'accounts'), class: "btn btn-default btn-lg" %> <%= link_to 'Signup as a Student', student_signup_url(subdomain: 'accounts'), class: "btn btn-default btn-lg" %>
+    <% end %>
+  </div>
+</div>

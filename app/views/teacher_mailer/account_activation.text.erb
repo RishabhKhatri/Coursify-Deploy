@@ -1,0 +1,5 @@
+Hi, <%= @teacher.name %>,
+
+  Welcome to Coursify.in! Click on the link below to activate your account:
+
+  <%= edit_account_activation_url(@teacher.activation_token, email: @teacher.email) %>
