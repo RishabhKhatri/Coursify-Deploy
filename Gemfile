@@ -59,6 +59,15 @@ gem 'mailgun-ruby', require: 'mailgun'
 # Extract YouTube Id
 gem 'youtube_id'
 
+# Google Drive API
+gem 'google-api-client'
+
+# Date time input
+gem 'time_splitter'
+
+# For countdown
+gem 'countdown'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

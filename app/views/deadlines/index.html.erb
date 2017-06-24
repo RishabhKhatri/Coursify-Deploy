@@ -1,0 +1,181 @@
+<% provide(:title, "#{@course.code.upcase} - Deadlines") %>
+
+<div class="row">
+  <div class="col-xs-2">
+    <%= render 'courses/menu' %>
+  </div>
+  <div class="col-xs-10">
+    <%= link_to '<i class="fa fa-plus" aria-hidden="true"></i> New Deadline'.html_safe, '#', class: 'btn btn-default', style: 'float: right', "data-toggle" => 'modal', "data-target" => '#newDeadline' %>
+    <% if @course.deadlines.exists? %>
+    <% @course.deadlines.each do |r| %>
+    <% if !r.title.nil? %>
+    <div class="course-panel panel panel-default">
+      <div class="panel-body">
+        <h1><%= r.title %></h1>
+        <p><%= r.instructions %></p>
+        <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, '#', "data-toggle" => 'modal', "data-target" => '#editDeadline', class: 'btn btn-default btn-sm' %>
+        <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>
+ Delete'.html_safe, deadline_url(@course.code, r.id), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-default btn-sm' %>
+        <span style="font-size: 15px;"><%= distance_of_time_in_words(r.created_at, r.due_date.to_time+r.end_time.hour.hours) %> from now</span>
+        <% if !r.attachment_url.nil? %><%= link_to 'Download', r.attachment_url, class: 'btn btn-default', style: 'float: right' %> <% end %>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editDeadline" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id=""></h4>
+          </div>
+          <div class="modal-body">
+            <% @deadline = r %>
+            <%= form_for(@deadline, url: deadline_url(@course.code, @deadline.id), :html => {class: 'form-horizontal'}) do |f| %>
+
+            <%= render 'shared/deadline_error_messages', class: 'form-control' %>
+
+            <div class="form-group">
+              <%= f.label :title, class: 'control-label col-xs-2' %>
+              <div class="col-xs-10">
+                <%= f.text_field :title, class: 'form-control', placeholder: "Title" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :instructions, class: 'control-label col-xs-2' %>
+              <div class="col-xs-10">
+                <%= f.text_area :instructions, class: 'form-control', placeholder: "Instructions" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-offset-2 col-xs-10">
+                <button id="editLinkButton" type="button" name="button" onclick='showElement("editLink")' class="btn btn-default btn-lg"><i class="fa fa-file-text-o" aria-hidden="true"></i></button>
+                <button id="editAttachmentButton" type="button" name="button" onclick='showElement("editAttachment")' class="btn btn-default btn-lg"><i class="fa fa-link" aria-hidden="true"></i></button>
+              </div>
+            </div>
+
+            <div id="editLink" class="form-group" style="display: none;" data-type="link">
+              <%= f.label "Link", class: 'control-label col-xs-2' %>
+              <div class="col-xs-10">
+                <%= f.text_field :link, class: 'form-control', placeholder: "Link" %>
+              </div>
+            </div>
+
+            <div id="editAttachment" class="form-group" style="display: none;" data-type="attachment">
+              <%= f.label :attachment, class: 'control-label col-xs-2' %>
+              <div class="col-xs-10">
+                <%= f.file_field :attachment, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label "Due Date", class: 'control-label col-xs-2' %>
+              <div class="col-xs-10">
+                <%= f.date_field :due_date, class: 'form-control', placeholder: "Due Date" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label "End Time", class: 'control-label col-xs-2' %>
+              <div class="col-xs-10">
+                <%= f.time_field :end_time, class: 'form-control', placeholder: "End Time" %>
+              </div>
+            </div>
+
+            <div class="col-xs-offset-2 col-xs-10">
+              <%= f.submit "Submit", class: "btn btn-primary" %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+  <% else %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h1>No deadlines yet :D</h1>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="newDeadline" tabindex="-1" role="dialog" aria-labelledby="newResource" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="">New Deadline</h4>
+      </div>
+      <div class="modal-body" style="overflow: auto">
+        <% @deadline = @course.deadlines.build %>
+        <%= form_for(@deadline, :html => {class: 'form-horizontal'}) do |f| %>
+
+        <%= render 'shared/deadline_error_messages', class: 'form-control' %>
+
+        <div class="form-group">
+          <%= f.label :title, class: 'control-label col-xs-2' %>
+          <div class="col-xs-10">
+            <%= f.text_field :title, class: 'form-control', placeholder: "Title" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :instructions, class: 'control-label col-xs-2' %>
+          <div class="col-xs-10">
+            <%= f.text_area :instructions, class: 'form-control', placeholder: "Instructions" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-offset-2 col-xs-10">
+            <button id="newLinkButton" type="button" name="button" onclick='showElement("newLink")' class="btn btn-default btn-lg"><i class="fa fa-link" aria-hidden="true"></i></button>
+            <button id="newAttachmentButton" type="button" name="button" onclick='showElement("newAttachment")' class="btn btn-default btn-lg"><i class="fa fa-file-text-o" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+        <div id="newLink" class="form-group" style="display: none;" data-type="link">
+          <%= f.label "Link", class: 'control-label col-xs-2' %>
+          <div class="col-xs-10">
+            <%= f.text_field :link, class: 'form-control', placeholder: "Link" %>
+          </div>
+        </div>
+
+        <div id="newAttachment" class="form-group" style="display: none;" data-type="attachment">
+          <%= f.label :attachment, class: 'control-label col-xs-2' %>
+          <div class="col-xs-10">
+            <%= f.file_field :attachment, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Due Date", class: 'control-label col-xs-2' %>
+          <div class="col-xs-10">
+            <%= f.date_field :due_date, class: 'form-control', placeholder: "Due Date" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "End Time", class: 'control-label col-xs-2' %>
+          <div class="col-xs-10">
+            <%= f.time_field :end_time, class: 'form-control', placeholder: "End Time" %>
+          </div>
+        </div>
+
+        <div class="col-xs-offset-2 col-xs-10">
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

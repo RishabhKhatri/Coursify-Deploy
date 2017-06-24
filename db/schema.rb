@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620104615) do
+ActiveRecord::Schema.define(version: 20170624195307) do
 
   create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20170620104615) do
     t.date     "end_date"
     t.boolean  "archived",                 default: false
     t.index ["teacher_id"], name: "index_courses_on_teacher_id", using: :btree
+  end
+
+  create_table "deadlines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "course_id"
+    t.string   "title"
+    t.text     "instructions", limit: 65535
+    t.string   "attachment"
+    t.date     "due_date"
+    t.string   "link"
+    t.string   "submission"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.time     "end_time"
+    t.index ["course_id"], name: "index_deadlines_on_course_id", using: :btree
   end
 
   create_table "institutes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -100,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170620104615) do
   end
 
   add_foreign_key "courses", "teachers"
+  add_foreign_key "deadlines", "courses"
   add_foreign_key "resources", "courses"
   add_foreign_key "teachers", "institutes"
 end

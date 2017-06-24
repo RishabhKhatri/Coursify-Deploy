@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   has_many :resources, dependent: :destroy
+  has_many :deadlines, dependent: :destroy
   belongs_to :teacher
 
   validates :name, presence: true, length: { maximum: 50 }

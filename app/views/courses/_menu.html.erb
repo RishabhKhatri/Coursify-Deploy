@@ -1,6 +1,6 @@
 <ul class="vertical-menu">
   <li><%= link_to "#{@course.code.upcase}".html_safe, course_url(@course, subdomain: current_institute.subdomain) %></li>
-  <li><%= link_to "Deadlines".html_safe, '#' %></li>
+  <li><%= link_to "Deadlines".html_safe, deadlines_url(@course, subdomain: current_institute.subdomain) %></li>
   <li><%= link_to "Resources".html_safe, resources_url(@course, subdomain: current_institute.subdomain) %></li>
   <li><%= link_to "Discussions".html_safe, '#' %></li>
 </ul>

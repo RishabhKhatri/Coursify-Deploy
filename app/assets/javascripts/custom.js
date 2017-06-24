@@ -28,3 +28,22 @@ function check() {
 }
 
 check()
+
+function showElement(id) {
+  if (id == "newLink") {
+    document.getElementById("newLink").style.display = "block"
+    document.getElementById("newLinkButton").style.display = "none"
+  }
+  else if (id == "newAttachment") {
+    document.getElementById("newAttachment").style.display = "block"
+    document.getElementById("newAttachmentButton").style.display = "none"
+  }
+  else if (id == "editLink") {
+    document.getElementById("editLink").style.display = "block"
+    document.getElementById("editLinkButton").style.display = "none"
+  }
+  else if (id == "editAttachment") {
+    document.getElementById("editAttachment").style.display = "block"
+    document.getElementById("editAttachmentButton").style.display = "none"
+  }
+}
