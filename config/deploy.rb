@@ -1,5 +1,5 @@
 set :application, "Coursify"
-set :repository,  "git@github.com:RishabhKhatri/Coursify.git"
+set :repository,  "git@github.com:RishabhKhatri/Coursify-Deploy.git"
 set :deploy_to, "/home/rishabh/Coursify"
 set :scm, :git
 set :branch, "master"
