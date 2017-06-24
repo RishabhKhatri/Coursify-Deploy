@@ -1,6 +1,7 @@
 require "subdomain"
 
 Rails.application.routes.draw do
+
   # Signup routes
   get '/signup', to: 'static#signup', constraints: {subdomain: 'accounts'}
 
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
     get '/teachers/:id/remove', to: 'institutes#remove_teacher', as: 'remove_teacher'
 
     resources :resources, path: '/courses/:code/resources'
+    resources :deadlines, path: '/courses/:code/deadlines'
   end
 
   get '/institutes/new', to: 'institutes#new'
